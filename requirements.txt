@@ -1,0 +1,10 @@
+scikit-learn
+fastapi
+pandas
+numpy
+matplotlib
+gunicorn
+pickle-mixin  
+uvicorn
+gensim
+
