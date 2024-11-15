@@ -7,4 +7,6 @@ gunicorn
 pickle-mixin  
 uvicorn
 gensim
-
+pydantic
+json
+requests
