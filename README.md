@@ -1,12 +1,12 @@
-# Diabetes Prediction API
+Diabetes Prediction API
 Project Description
 This project is a FastAPI-based web service that predicts the likelihood of diabetes in an individual based on various health-related input parameters. The machine learning model used in this project is trained on relevant medical data and is saved as a .sav file, which is loaded for predictions. The web service runs inside a Docker container and exposes a REST API for easy interaction.
 
 Pull the Docker Image 📥
 You can pull the latest Docker image of the project from Docker Hub:
 
-bash
-'''C opy code
+'''bash
+Copy code
 docker pull zaidtech/diabetes_model_prediction:latest
 Run the Docker Container 🏃‍♂️
 After pulling the image, you can run the container with the following command:
