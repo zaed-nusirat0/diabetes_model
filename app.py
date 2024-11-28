@@ -1,13 +1,11 @@
 from fastapi import FastAPI
 import pickle
-import json
 from pydantic import BaseModel
-import uvicorn 
-import requests
 
-app=FastAPI()
+app = FastAPI()
 
-class input_data(BaseModel):
+
+class InputData(BaseModel):
     Pregnancies: int
     Glucose: int
     BloodPressure: int
@@ -16,51 +14,39 @@ class input_data(BaseModel):
     BMI: float
     DiabetesPedigreeFunction: float
     Age: int
-    
-model_prediction=pickle.load(open('diabetes_model.sav','rb'))
+
+
+model_prediction = pickle.load(open('diabetes_model.sav', 'rb'))
+
+
 @app.get('/')
-
 def root():
-    return {'hello':'name'}
+    return {'message': 'Welcome to the Diabetes Prediction API'}
+
 
 @app.get('/{name}')
+def get_name(name: str):
+    return {'Hello Dear': name}
 
-@app.get('/{name}')
-def get_name(name:str):
-  return {'Hello Dear : ': f'{name}'}
 
 @app.post('/diabetes_prediction')
+def diabetes_predd(input_parameters: InputData):
+    input_dictionary = input_parameters.dict()
+    list_input = [
+        input_dictionary['Pregnancies'],
+        input_dictionary['Glucose'],
+        input_dictionary['BloodPressure'],
+        input_dictionary['SkinThickness'],
+        input_dictionary['Insulin'],
+        input_dictionary['BMI'],
+        input_dictionary['DiabetesPedigreeFunction'],
+        input_dictionary['Age']
+    ]
 
-def diabetes_predd(input_parameters:input_data):
-    input_dictionary =input_parameters.dict()
-    
-    preg = input_dictionary['Pregnancies']
-    
-    glu = input_dictionary['Glucose']
-    
-    bp = input_dictionary['BloodPressure']
-    
-    skin = input_dictionary['SkinThickness']
-    
-    insulin = input_dictionary['Insulin']
-    
-    bmi = input_dictionary['BMI']
-    
-    dpf = input_dictionary['DiabetesPedigreeFunction']
-    
-    age = input_dictionary['Age']
-    
-    list_input=[preg, glu, bp, skin, insulin, bmi, dpf, age]
-    
-    prediction=model_prediction.predict([list_input])
-    if prediction[0]==0:
+    prediction = model_prediction.predict([list_input])
+    if prediction[0] == 0:
         result = 'The person is not diabetic'
     else:
         result = 'The person is diabetic'
-        
-    return {'prediction':result}
-        
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000, log_level="info")
-
+    return {'prediction': result}
