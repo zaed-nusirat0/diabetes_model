@@ -6,7 +6,7 @@ Pull the Docker Image 📥
 You can pull the latest Docker image of the project from Docker Hub:
 
 bash
-'''Copy code
+'''C opy code
 docker pull zaidtech/diabetes_model_prediction:latest
 Run the Docker Container 🏃‍♂️
 After pulling the image, you can run the container with the following command:
