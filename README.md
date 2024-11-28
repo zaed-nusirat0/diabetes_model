@@ -28,7 +28,7 @@ docker pull zaidtech/diabetes_model_prediction:latest
 Run the Docker Container 🏃‍♂️
 After pulling the image, you can run the container with the following command:
 
-bash
+```bash
 Copy code
 docker run -d -p 8000:8000 zaidtech/diabetes_model_prediction:latest
 Test the Diabetes Prediction API 🌐
